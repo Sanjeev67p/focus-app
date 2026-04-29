@@ -3,116 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <title>WorkGrid</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Header -->
-  <header>
-    <h1>WorkGrid</h1>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-
-    <!-- Task Creation Section -->
-    <section id="task-creation">
-      <h2>Create Task</h2>
-
-      <form id="task-form">
-        <label for="task-name">Task Name</label>
-        <input
-          type="text"
-          id="task-name"
-          name="task-name"
-          placeholder="Enter task name"
-          required
-        >
-
-        <button type="submit" id="add-task-button">
-          Add Task
-        </button>
-      </form>
-
-      <div id="status"></div>
-    </section>
-
-    <!-- Task List Section -->
-    <section id="task-list">
-      <h2>Tasks</h2>
-
-      <!-- Active Tasks -->
-      <div class="active-tasks">
-        <h3>Active Tasks</h3>
-
-        <ul id="active-tasks-list">
-          <li class="task-item">
-            <span class="task-name">Learn HTML</span>
-            <span class="task-time">00:00:00</span>
-
-            <div class="task-controls">
-              <button type="button">Start</button>
-              <button type="button">Pause</button>
-              <button type="button">Complete</button>
-              <button type="button">Delete</button>
-            </div>
-          </li>
-        </ul>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Productivity tracker</p>
+        <h1>WorkGrid</h1>
+        <p class="subtitle">Track one focused task at a time and keep the flow clear.</p>
       </div>
+    </header>
 
-      <!-- Completed Tasks -->
-      <div class="completed-tasks-list">
-        <h3>Completed Tasks</h3>
-
-        <ul id="completed-tasks-list">
-          <li class="task-item">
-            <span class="task-name">Build Portfolio</span>
-            <span class="task-time">01:24:15</span>
-
-            <div class="task-controls">
-              <button type="button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Dashboard Section -->
-    <section id="dashboard">
-      <h2>Dashboard</h2>
-
-      <div class="stats-grid">
-
-        <div class="stat-card">
-          <h3>Total Tasks</h3>
-          <p id="total-tasks">0</p>
+    <main class="app-main">
+      <section class="card" id="task-creation">
+        <div class="section-heading">
+          <h2>Create Task</h2>
+          <p>Add a new task and it will become the selected task automatically.</p>
         </div>
 
-        <div class="stat-card">
-          <h3>Active Tasks</h3>
-          <p id="active-tasks-count">0</p>
+        <form id="task-form" class="task-form">
+          <label for="task-name">Task name</label>
+          <div class="task-form-row">
+            <input
+              type="text"
+              id="task-name"
+              name="task-name"
+              placeholder="Enter task name"
+              autocomplete="off"
+              required
+            >
+            <button type="submit" id="add-task-button">Add Task</button>
+          </div>
+        </form>
+
+        <div id="status" class="status" aria-live="polite"></div>
+      </section>
+
+      <section class="card" id="task-control-panel">
+        <div class="section-heading">
+          <h2>Task Control</h2>
+          <p>Only the selected task responds here.</p>
         </div>
 
-        <div class="stat-card">
-          <h3>Completed Tasks</h3>
-          <p id="completed-tasks-count">0</p>
+        <div class="central-controls">
+          <button type="button" id="central-start-stop">Start</button>
+          <button type="button" id="complete-task-button">Complete</button>
+          <button type="button" id="delete-task-button" class="danger">Delete</button>
         </div>
 
-        <div class="stat-card">
-          <h3>Total Time Today</h3>
-          <p id="total-time">0m</p>
+        <p id="selected-task-label" class="selected-task-label">No task selected</p>
+      </section>
+
+      <section class="card" id="task-list">
+        <div class="section-heading">
+          <h2>Tasks</h2>
+          <p>Click a task to select it.</p>
         </div>
 
-      </div>
-    </section>
+        <div class="task-columns">
+          <div class="task-column">
+            <h3>Active Tasks</h3>
+            <ul id="active-tasks-list" class="task-list"></ul>
+          </div>
 
-  </main>
+          <div class="task-column">
+            <h3>Completed Tasks</h3>
+            <ul id="completed-tasks-list" class="task-list"></ul>
+          </div>
+        </div>
+      </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 WorkGrid</p>
-  </footer>
+      <section class="card" id="dashboard">
+        <div class="section-heading">
+          <h2>Dashboard</h2>
+          <p>Simple live overview of your work.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Tasks</h3>
+            <p id="total-tasks">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Active Tasks</h3>
+            <p id="active-tasks-count">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Completed Tasks</h3>
+            <p id="completed-tasks-count">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Total Time Today</h3>
+            <p id="total-time">00:00:00</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2026 WorkGrid</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
