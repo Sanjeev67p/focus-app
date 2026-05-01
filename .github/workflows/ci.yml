@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -20,6 +20,7 @@ jobs:
           test -f script.js
           test -f style.css
 
+
   build:
     runs-on: ubuntu-latest
     needs: validate
@@ -28,9 +29,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Simulate build
+      - name: Build output
         working-directory: frontend
         run: |
-          echo "Building project..."
+          mkdir dist
+          cp index.html script.js style.css dist/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: frontend/dist
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+
+      - name: Show deployed files
+        run: |
           ls
-          echo "Build complete"
+          ls frontend-build || true
