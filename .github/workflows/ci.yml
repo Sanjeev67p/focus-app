@@ -12,14 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show structure
+      - name: Show project structure
         run: ls -R
 
-      - name: Validate frontend files
+      - name: Validate frontend
+        working-directory: frontend
         run: |
-          test -f frontend/index.html
-          test -f frontend/script.js
-          test -f frontend/style.css
+          test -f index.html
+          test -f script.js
+          test -f style.css
 
       - name: Success
-        run: echo "Frontend validated"
+        run: echo "Frontend is valid"
