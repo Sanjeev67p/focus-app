@@ -19,7 +19,7 @@ jobs:
         working-directory: frontend
         run: |
           test -f index.html
-          test -f script2.js
+          test -f script.js
           test -f style.css
 
       - name: Success
