@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show structure
+        run: ls -R
+
+      - name: Validate frontend files
+        run: |
+          test -f frontend/index.html
+          test -f frontend/script.js
+          test -f frontend/style.css
+
+      - name: Success
+        run: echo "Frontend validated"
