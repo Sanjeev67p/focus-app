@@ -16,8 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Validate frontend files
         working-directory: frontend
@@ -32,8 +31,7 @@ jobs:
     needs: validate
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Build output
         working-directory: frontend
@@ -53,10 +51,6 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
 
-    permissions:
-      pages: write
-      id-token: write
-
     environment:
       name: github-pages
 
@@ -65,7 +59,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
-          path: .
+          path: dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -73,7 +67,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./frontend-build
+          path: dist
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: actions/deploy-pages@v4
